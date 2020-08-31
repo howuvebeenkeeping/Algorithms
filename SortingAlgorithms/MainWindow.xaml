@@ -1,0 +1,55 @@
+﻿<Window x:Class="SortingAlgorithms.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SortingAlgorithms"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="625">
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="StackPanelProgressBars" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Margin="5,0" VerticalAlignment="Center">
+                <ProgressBar x:Name="ProgessBar1" Width="20" Height="100" Orientation="Vertical"/>
+                <Label x:Name="LblProgressBar1"></Label>
+            </StackPanel>
+            <StackPanel Margin="5,0" VerticalAlignment="Center">
+                <ProgressBar x:Name="ProgessBar2" Width="20" Height="100" Orientation="Vertical"/>
+                <Label x:Name="LblProgressBar2"></Label>
+            </StackPanel>
+            <StackPanel Margin="5,0" VerticalAlignment="Center">
+                <ProgressBar x:Name="ProgessBar3" Width="20" Height="100" Orientation="Vertical"/>
+                <Label x:Name="LblProgressBar3"></Label>
+            </StackPanel>
+            <StackPanel Margin="5,0" VerticalAlignment="Center">
+                <ProgressBar x:Name="ProgessBar4" Width="20" Height="100" Orientation="Vertical"/>
+                <Label x:Name="LblProgressBar4"></Label>
+            </StackPanel>
+            <StackPanel Margin="5,0" VerticalAlignment="Center">
+                <ProgressBar x:Name="ProgessBar5" Width="20" Height="100" Orientation="Vertical"/>
+                <Label x:Name="LblProgressBar5"></Label>
+            </StackPanel>
+            <StackPanel Margin="5,0" VerticalAlignment="Center">
+                <ProgressBar x:Name="ProgessBar6" Width="20" Height="100" Orientation="Vertical"/>
+                <Label x:Name="LblProgressBar6"></Label>
+            </StackPanel>
+            <StackPanel Margin="5,0" VerticalAlignment="Center">
+                <ProgressBar x:Name="ProgessBar7" Width="20" Height="100" Orientation="Vertical"/>
+                <Label x:Name="LblProgressBar7"></Label>
+            </StackPanel>
+            <StackPanel Margin="5,0" VerticalAlignment="Center">
+                <ProgressBar x:Name="ProgessBar8" Width="20" Height="100" Orientation="Vertical"/>
+                <Label x:Name="LblProgressBar8"></Label>
+            </StackPanel>
+        </StackPanel>
+        <Button x:Name="BtnSort" Grid.Row="1" Width="80" Height="30" Content="Sort" Click="BtnSort_OnClick"></Button>
+    </Grid>
+
+</Window>
