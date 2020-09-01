@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SortingAlgorithms"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="625">
+        Title="MainWindow" Height="450" Width="625" FontFamily="JetBrains Mono">
     <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -15,8 +15,27 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel x:Name="StackPanelProgressBars" Orientation="Horizontal" HorizontalAlignment="Center">
-            <StackPanel Margin="5,0" VerticalAlignment="Center">
+        <Grid ShowGridLines="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Label Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">Добавить число</Label>
+            <WrapPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBox x:Name="TextBoxAddNumber" Width="200" Height="20" Margin="0,0,5,0"/>
+                <Button x:Name="BtnAddNumber" Width="80" Height="20" Click="BtnAddNumber_Click">Добавить</Button>
+            </WrapPanel>
+            <Label Grid.Row="2"  Height="26" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0">Заполнить коллекцию случайными числами</Label>
+            <WrapPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBox x:Name="TextBoxFillWithRandom" Width="200" Height="20" Margin="0,0,5,0"/>
+                <Button x:Name="BtnFillWithRandom" Width="80" Height="20" Click="BtnFillWithRandom_Click">Добавить</Button>
+            </WrapPanel>
+        </Grid>
+        <StackPanel x:Name="StackPanelProgressBars" Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1">
+            <!--<StackPanel Margin="5,0" VerticalAlignment="Center">
                 <ProgressBar x:Name="ProgessBar1" Width="20" Height="100" Orientation="Vertical"/>
                 <Label x:Name="LblProgressBar1"></Label>
             </StackPanel>
@@ -47,9 +66,10 @@
             <StackPanel Margin="5,0" VerticalAlignment="Center">
                 <ProgressBar x:Name="ProgessBar8" Width="20" Height="100" Orientation="Vertical"/>
                 <Label x:Name="LblProgressBar8"></Label>
-            </StackPanel>
+            </StackPanel>-->
+            
         </StackPanel>
-        <Button x:Name="BtnSort" Grid.Row="1" Width="80" Height="30" Content="Sort" Click="BtnSort_OnClick"></Button>
+        <Button x:Name="BtnSort" Grid.Row="1" Width="80" Height="30" Content="Sort"></Button>
     </Grid>
 
 </Window>

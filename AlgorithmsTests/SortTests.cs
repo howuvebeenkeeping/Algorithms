@@ -11,53 +11,59 @@ namespace AlgorithmsTests
     public class SortTests
     {
         private static readonly Random Random = new Random();
-        private static readonly SortBase<int> SortBase = new SortBase<int>();
+        private static readonly IList<int> ItemsForSorting = new List<int>();
+        private static readonly IList<int> ItemsSorted;
+        private static int ItemsCount { get; } = 8_000;
         
         static SortTests()
         {
-            // сортируемые коллекции будут одинаковыми 
-            for (var i = 0; i < 8_000; i++)
+            // sorting collections are the same
+            for (var i = 0; i < ItemsCount; i++)
             {
-                SortBase.Items.Add(Random.Next(0, 100));
+                ItemsForSorting.Add(Random.Next(0, 100));
             }
+            ItemsSorted = ItemsForSorting.OrderBy(x => x).ToArray();
         }
         
         [Test]
-        public void BubbleSortTest() // 1 min 51 sec (80_000 элементов) 
+        public void BubbleSortTest() // 2 min 29 sec (80_000)
         {
             // Arrange
-            var items = new List<int>(SortBase.Items);
-            var bubbleSort = new BubbleSort<int> {Items = items};
-            Debug.WriteLine(bubbleSort.Items[0] + bubbleSort.Items[10]);
+            var bubbleSort = new BubbleSort<int> {Items = new List<int>(ItemsForSorting)};
 
             // Act
             bubbleSort.Sort();
             
             // Assert
-            var expected = bubbleSort.Items.OrderBy(x => x).ToArray();
-            var actual = bubbleSort.Items;
-
-            for (var i = 0; i < expected.Length; i++)
+            for (var i = 0; i < ItemsCount; i++)
             {
-                Assert.AreEqual(expected[i], actual[i]);    
+                Assert.AreEqual(ItemsSorted[i], bubbleSort.Items[i]);    
             }
         }
 
         [Test]
-        public void CocktailSortTest() // 1 min 45 sec (80_000 элементов)
+        public void CocktailSortTest() // 2 min 23 sec (80_000)
         {
-            var items = new List<int>(SortBase.Items);
-            var cocktailSort = new CocktailSort<int> {Items = items};
-            Debug.WriteLine(cocktailSort.Items[0] + cocktailSort.Items[10]);
+            var cocktailSort = new CocktailSort<int> {Items = new List<int>(ItemsForSorting)};
             
             cocktailSort.Sort();
 
-            var expected = cocktailSort.Items.OrderBy(x => x).ToArray();
-            var actual = cocktailSort.Items;
-
-            for (var i = 0; i < expected.Length; i++)
+            for (var i = 0; i < ItemsCount; i++)
             {
-                Assert.AreEqual(expected[i], actual[i]);
+                Assert.AreEqual(ItemsSorted[i], cocktailSort.Items[i]);
+            }
+        }
+        
+        [Test]
+        public void InsertSortTest() // 40 sec (80_000)
+        {
+            var insertSort = new InsertSort<int> {Items = new List<int>(ItemsForSorting)};
+            
+            insertSort.Sort();
+
+            for (var i = 0; i < ItemsCount; i++)
+            {
+                Assert.AreEqual(ItemsSorted[i], insertSort.Items[i]);
             }
         }
     }

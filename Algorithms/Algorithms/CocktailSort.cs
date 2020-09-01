@@ -6,8 +6,9 @@ namespace Algorithms
     {
         // O(n) - в лучшем случае
         // O(n^2) - в худшем случае
-        public override void Sort()
+        protected override void DoSort()
         {
+            var swapCountPrev = SwapCount;
             var left = 0;
             var right = Items.Count - 1;
             while (left < right)
@@ -16,17 +17,21 @@ namespace Algorithms
                 {
                     if (Items[i].CompareTo(Items[i + 1]) == 1)
                     {
-                        (Items[i], Items[i + 1]) = (Items[i + 1], Items[i]);
+                        CompareCount++;
+                        Swap(i, i + 1);
                     }
                 }
                 
                 right--;
+
+                if (swapCountPrev == SwapCount) return;
                 
                 for (var i = right; i > left; i--)
                 {
                     if (Items[i].CompareTo(Items[i - 1]) == -1)
                     {
-                        (Items[i], Items[i - 1]) = (Items[i - 1], Items[i]);
+                        CompareCount++;
+                        Swap(i, i - 1);
                     }
                 }
 

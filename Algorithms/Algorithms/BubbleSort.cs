@@ -5,8 +5,9 @@ namespace Algorithms
     public class BubbleSort<T> : SortBase<T> where T : IComparable
     {
         // O(n)
-        public override void Sort()
+        protected override void DoSort()
         {
+            var swapCountPrev = SwapCount;
             var count = Items.Count;
             // j можно принять за кол-во отсортированных элементов
             for (var j = 0; j < count; j++) 
@@ -15,9 +16,11 @@ namespace Algorithms
                 {
                     if (Items[i].CompareTo(Items[i + 1]) == 1)
                     {
-                        (Items[i], Items[i + 1]) = (Items[i + 1], Items[i]);
+                        CompareCount++;
+                        Swap(i, i + 1);
                     }
                 }
+                if (swapCountPrev == SwapCount) return;
             }
         }
     }
