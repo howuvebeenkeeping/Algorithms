@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using Algorithms;
 
@@ -10,68 +16,20 @@ namespace SortingAlgorithms
 {
     public partial class MainWindow
     {
-        //private readonly SortBase<int> _bubbleSort = new BubbleSort<int>();
-        //private readonly IList<ProgressBar> _progressBars= new List<ProgressBar>();
-        //private readonly IList<Label> _lables = new List<Label>();
-        //private static readonly Random Random = new Random();
-        private List<SortingItem> items = new List<SortingItem>();
-
+        public ObservableCollection<SortingItem> Items { get; set; } = new ObservableCollection<SortingItem>();
+        
         public MainWindow()
         {
+            DataContext = this;
             InitializeComponent();
-            #region ttt
-            //for (var i = 0; i < 8; i++)
-            //{
-            //    _bubbleSort.Items.Add(Random.Next(0, 100));
-            //}
-
-            //foreach(var UIElement in StackPanelProgressBars.Children)
-            //{
-            //    if (!(UIElement is StackPanel stackPanel)) continue;
-            //    foreach (var @object in stackPanel.Children)
-            //    {
-            //        switch (@object)
-            //        {
-            //            case ProgressBar progressBar:
-            //                _progressBars.Add(progressBar);
-            //                break;
-            //            case Label label:
-            //                _lables.Add(label);
-            //                break;
-            //        }
-            //    }
-            //}
-
-            //foreach (var progressBar in _progressBars)
-            //{
-            //    progressBar.Foreground = new SolidColorBrush(Colors.Blue);
-            //}
-            //UpdateWithItems(_bubbleSort.Items);
-            #endregion
         }
-
-        //private void UpdateWithItems(IList<int> items)
-        //{    
-        //    for (var i = 0; i < items.Count; i++)
-        //    {
-        //        _progressBars[i].Value = items[i];
-        //        _lables[i].Content = items[i].ToString();
-        //    }
-        //}
-
-        //private void BtnSort_OnClick(object sender, RoutedEventArgs e)
-        //{
-        //    _bubbleSort.Sort();
-        //    UpdateWithItems(_bubbleSort.Items);
-        //}
-
+        
         private void BtnAddNumber_Click(object sender, RoutedEventArgs e)
         {
-            if (int.TryParse(TextBoxAddNumber.Text, out int value))
+            if (int.TryParse(TextBoxAddNumber.Text, out var value))
             {
-                var item = new SortingItem(value);
-                items.Add(item);
-                StackPanelProgressBars.Children.Add(item.StackPanel);
+                var item = new SortingItem(value, Items.Count + 1);
+                Items.Add(item);
             }
 
             TextBoxAddNumber.Text = string.Empty;
@@ -79,19 +37,54 @@ namespace SortingAlgorithms
 
         private void BtnFillWithRandom_Click(object sender, RoutedEventArgs e)
         {
-            if (int.TryParse(TextBoxFillWithRandom.Text, out int value))
+            if (int.TryParse(TextBoxFillWithRandom.Text, out var value))
             {
                 var rnd = new Random();
 
-                for (int i = 0; i < value; i++)
+                for (var i = 0; i < value; i++)
                 {
-                    var item = new SortingItem(rnd.Next(0, 100));
-                    items.Add(item);
-                    StackPanelProgressBars.Children.Add(item.StackPanel);
+                    var item = new SortingItem(rnd.Next(100), Items.Count + 1);
+                    Items.Add(item);
                 }
             }
 
             TextBoxFillWithRandom.Text = string.Empty;
+        }
+
+        private void BtnBubbleSort_Click(object sender, RoutedEventArgs e)
+        {
+            var bubbleSort = new BubbleSort<SortingItem> {Items = this.Items};
+            bubbleSort.CompareEvent += SortOnCompareEvent;
+            bubbleSort.SwapEvent += SortOnSwapEvent;
+            bubbleSort.ColorsDefaultEvent += SortOnColorsDefaultEvent;
+            bubbleSort.Sort();
+        }
+
+        private void SortOnColorsDefaultEvent(object sender, Tuple<SortingItem, SortingItem> e)
+        {
+            e.Item1.SetColor(Colors.Green);
+            e.Item2.SetColor(Colors.Green);
+        }
+
+        private void SortOnSwapEvent(object sender, Tuple<SortingItem, SortingItem> e)
+        {
+            e.Item1.SetColor(Colors.Red);
+            e.Item2.SetColor(Colors.Red);
+        }
+
+        private void SortOnCompareEvent(object sender, Tuple<SortingItem, SortingItem> e)
+        {
+            e.Item1.SetColor(Colors.Blue);
+            e.Item2.SetColor(Colors.Blue);
+        }
+
+        private void BtnCocktailSort_OnClick(object sender, RoutedEventArgs e)
+        {
+            var cocktailSort = new CocktailSort<SortingItem> {Items = this.Items};
+            cocktailSort.CompareEvent += SortOnCompareEvent;
+            cocktailSort.SwapEvent += SortOnSwapEvent;
+            cocktailSort.ColorsDefaultEvent += SortOnColorsDefaultEvent;
+            cocktailSort.Sort();
         }
     }
 }

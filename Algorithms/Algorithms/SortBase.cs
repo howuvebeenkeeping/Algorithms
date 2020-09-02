@@ -1,20 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Algorithms
 {
-    public abstract class SortBase<T> where T : IComparable
+    public class SortBase<T> where T : IComparable
     {
         protected int SwapCount { get; set; } = 0;
         protected int CompareCount { get; set; } = 0;
-        public IList<T> Items { get; set; } = new List<T>();
+        public ObservableCollection<T> Items { get; set; }
+        public event EventHandler<Tuple<T, T>> CompareEvent; 
+        public event EventHandler<Tuple<T, T>> SwapEvent; 
+        public event EventHandler<Tuple<T, T>> ColorsDefaultEvent; 
+
+        public SortBase() { }
 
         protected void Swap(int pos1, int pos2)
         {
-            (Items[pos1], Items[pos2]) = (Items[pos2], Items[pos1]);
             SwapCount++;
+            (Items[pos1], Items[pos2]) = (Items[pos2], Items[pos1]);
+            SwapEvent?.Invoke(this, new Tuple<T, T>(Items[pos1], Items[pos2]));
         }
 
         public long Sort()
@@ -27,9 +36,21 @@ namespace Algorithms
             return timer.ElapsedMilliseconds;
         }
 
-        protected virtual void DoSort()
+        public virtual void DoSort()
         {
             Items.ToList().Sort();
+        }
+
+        protected void MakeColorsDefault(T a, T b)
+        {
+            ColorsDefaultEvent?.Invoke(this, new Tuple<T, T>(a, b));
+        }
+        
+        protected int Compare(T a, T b)
+        {
+            CompareEvent?.Invoke(this, new Tuple<T, T>(a, b));
+            CompareCount++;
+            return a.CompareTo(b);
         }
     }
 }

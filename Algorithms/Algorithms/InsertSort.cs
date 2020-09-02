@@ -4,7 +4,7 @@ namespace Algorithms
 {
     public class InsertSort<T> : SortBase<T> where T : IComparable
     {
-        protected override void DoSort()
+        public override void DoSort()
         {
             for (var i = 1; i < Items.Count; i++)
             {

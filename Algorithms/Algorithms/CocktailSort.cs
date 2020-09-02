@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Algorithms
 {
@@ -6,7 +7,7 @@ namespace Algorithms
     {
         // O(n) - в лучшем случае
         // O(n^2) - в худшем случае
-        protected override void DoSort()
+        public override async void DoSort()
         {
             var swapCountPrev = SwapCount;
             var left = 0;
@@ -15,11 +16,16 @@ namespace Algorithms
             {
                 for (var i = left; i < right; i++)
                 {
-                    if (Items[i].CompareTo(Items[i + 1]) == 1)
+                    var a = Items[i];
+                    var b = Items[i + 1];
+                    if (Compare(a, b) == 1)
                     {
+                        await Task.Delay(400);
                         CompareCount++;
                         Swap(i, i + 1);
                     }
+                    await Task.Delay(400);
+                    MakeColorsDefault(a, b);
                 }
                 
                 right--;
@@ -28,11 +34,16 @@ namespace Algorithms
                 
                 for (var i = right; i > left; i--)
                 {
-                    if (Items[i].CompareTo(Items[i - 1]) == -1)
+                    var a = Items[i];
+                    var b = Items[i - 1];
+                    if (Compare(a, b) == -1)
                     {
+                        await Task.Delay(400);
                         CompareCount++;
                         Swap(i, i - 1);
                     }
+                    await Task.Delay(400);
+                    MakeColorsDefault(a, b);
                 }
 
                 left++;
