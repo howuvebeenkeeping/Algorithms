@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using Algorithms;
+using Algorithms.SortingAlgorithms;
 
 namespace SortingAlgorithms
 {
@@ -54,37 +55,43 @@ namespace SortingAlgorithms
         private void BtnBubbleSort_Click(object sender, RoutedEventArgs e)
         {
             var bubbleSort = new BubbleSort<SortingItem> {Items = this.Items};
-            bubbleSort.CompareEvent += SortOnCompareEvent;
-            bubbleSort.SwapEvent += SortOnSwapEvent;
-            bubbleSort.ColorsDefaultEvent += SortOnColorsDefaultEvent;
-            bubbleSort.Sort();
+            bubbleSort.ColorChanged += OnColorChangedEvent;
+            bubbleSort.Sort(true);
         }
-
-        private void SortOnColorsDefaultEvent(object sender, Tuple<SortingItem, SortingItem> e)
-        {
-            e.Item1.SetColor(Colors.Green);
-            e.Item2.SetColor(Colors.Green);
-        }
-
-        private void SortOnSwapEvent(object sender, Tuple<SortingItem, SortingItem> e)
-        {
-            e.Item1.SetColor(Colors.Red);
-            e.Item2.SetColor(Colors.Red);
-        }
-
-        private void SortOnCompareEvent(object sender, Tuple<SortingItem, SortingItem> e)
-        {
-            e.Item1.SetColor(Colors.Blue);
-            e.Item2.SetColor(Colors.Blue);
-        }
-
+        
         private void BtnCocktailSort_OnClick(object sender, RoutedEventArgs e)
         {
             var cocktailSort = new CocktailSort<SortingItem> {Items = this.Items};
-            cocktailSort.CompareEvent += SortOnCompareEvent;
-            cocktailSort.SwapEvent += SortOnSwapEvent;
-            cocktailSort.ColorsDefaultEvent += SortOnColorsDefaultEvent;
-            cocktailSort.Sort();
+            cocktailSort.ColorChanged += OnColorChangedEvent;
+            cocktailSort.Sort(true);
+        }
+
+        private void BtnInsertSort_OnClick(object sender, RoutedEventArgs e)
+        {
+            var insertSort = new InsertSort<SortingItem> {Items = this.Items};
+            insertSort.ColorChanged += OnColorChangedEvent;
+            insertSort.Sort(true);
+        }
+
+        private void OnColorChangedEvent(object sender, Tuple<SortingItem, SortingItem, SortBase<SortingItem>.ChangeColor> e)
+        {
+            switch (e.Item3)
+            {
+                case SortBase<SortingItem>.ChangeColor.Swap:
+                    e.Item1.Color = new SolidColorBrush(Colors.Red);
+                    e.Item2.Color = new SolidColorBrush(Colors.Red);
+                    break;
+                case SortBase<SortingItem>.ChangeColor.Compare:
+                    e.Item1.Color = new SolidColorBrush(Colors.Blue);
+                    e.Item2.Color = new SolidColorBrush(Colors.Blue);
+                    break;
+                case SortBase<SortingItem>.ChangeColor.Default:
+                    e.Item1.Color = new SolidColorBrush(Colors.Green);
+                    e.Item2.Color = new SolidColorBrush(Colors.Green);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

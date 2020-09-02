@@ -6,67 +6,68 @@ using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Algorithms;
+using Algorithms.SortingAlgorithms;
 
 namespace AlgorithmsTests
 {
     [TestFixture]
     public class SortTests
     {
-        private static readonly Random Random = new Random();
-        private static readonly ObservableCollection<int> ItemsForSorting = new ObservableCollection<int>();
-        private static readonly List<int>? ItemsSorted;
-        private static int ItemsCount { get; } = 8_000;
-        
-        static SortTests()
+        private readonly Random _random = new Random();
+        private readonly IList<int> _itemsForSorting = new List<int>();
+        private readonly IList<int> _itemsSorted;
+        private readonly int itemsCount = 8000;
+
+        public SortTests()
         {
             // sorting collections are the same
-            for (var i = 0; i < ItemsCount; i++)
+            for (var i = 0; i < itemsCount; i++)
             {
-                ItemsForSorting.Add(Random.Next(100));
+                _itemsForSorting.Add(_random.Next(100));
             }
 
-            ItemsSorted = ItemsForSorting.OrderBy(x => x).ToList();
+            _itemsSorted = _itemsForSorting.OrderBy(x => x).ToList();
         }
 
         [Test]
-        public void BubbleSortTest() // 2 min 29 sec (80_000)
+        public void BubbleSortTest()
         {
             // Arrange
-            var bubbleSort = new BubbleSort<int> {Items = new ObservableCollection<int>(ItemsForSorting)};
+            var bubbleSort = new BubbleSort<int> {Items = new List<int>(_itemsForSorting)};
 
             // Act
-            bubbleSort.DoSort();
+            bubbleSort.Sort(false);
             
             // Assert
-            for (var i = 0; i < ItemsCount; i++)
+            for (var i = 0; i < itemsCount; i++)
             {
-                Assert.AreEqual(ItemsSorted[i], bubbleSort.Items[i]);    
+                Assert.AreEqual(_itemsSorted[i], bubbleSort.Items[i]);    
             }
         }
 
         [Test]
-        public void CocktailSortTest() // 2 min 23 sec (80_000)
+        public void CocktailSortTest()
         {
-            var cocktailSort = new CocktailSort<int> {Items = new ObservableCollection<int>(ItemsForSorting)};
+            var cocktailSort = new CocktailSort<int> {Items = new List<int>(_itemsForSorting)};
             
-            cocktailSort.Sort();
+            cocktailSort.Sort(false);
 
-            for (var i = 0; i < ItemsCount; i++)
+            for (var i = 0; i < itemsCount; i++)
             {
-                Assert.AreEqual(ItemsSorted[i], cocktailSort.Items[i]);
+                Assert.AreEqual(_itemsSorted[i], cocktailSort.Items[i]);
             }
         }
         
         [Test]
-        public void InsertSortTest() // 40 sec (80_000)
+        public void InsertSortTest()
         {
-            var insertSort = new InsertSort<int> {Items = new ObservableCollection<int>(ItemsForSorting)};
+            var insertSort = new InsertSort<int> {Items = new List<int>(_itemsForSorting)};
             
-            insertSort.Sort();
+            insertSort.Sort(false);
 
-            for (var i = 0; i < ItemsCount; i++)
+            for (var i = 0; i < itemsCount; i++)
             {
-                Assert.AreEqual(ItemsSorted[i], insertSort.Items[i]);
+                Assert.AreEqual(_itemsSorted[i], insertSort.Items[i]);
             }
         }
     }

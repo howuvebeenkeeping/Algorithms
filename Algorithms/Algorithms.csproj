@@ -40,10 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithms\CocktailSort.cs" />
-    <Compile Include="Algorithms\InsertSort.cs" />
-    <Compile Include="Algorithms\SortBase.cs" />
-    <Compile Include="Algorithms\BubbleSort.cs" />
+    <Compile Include="SearchingAlgorithms\BinarySearch.cs" />
+    <Compile Include="SortingAlgorithms\CocktailSort.cs" />
+    <Compile Include="SortingAlgorithms\InsertSort.cs" />
+    <Compile Include="SortingAlgorithms\SortBase.cs" />
+    <Compile Include="SortingAlgorithms\BubbleSort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

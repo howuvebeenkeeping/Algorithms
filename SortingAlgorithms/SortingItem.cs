@@ -18,9 +18,19 @@ namespace SortingAlgorithms
         public ProgressBar ProgressBar { get; set; }
         public Label Label { get; set; }
         public int Value { get; set; }
-        public SolidColorBrush Color { get; set; }
+        private SolidColorBrush color;
+        public SolidColorBrush Color
+        {
+            get => color;
+            set
+            {
+                NotifyPropertyChanged(ref color, value, nameof(Color));
+            } 
+        }
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
+        public SortingItem() {}
+
         public SortingItem(int value, int number)
         {
             Value = value;
@@ -52,21 +62,14 @@ namespace SortingAlgorithms
                 VerticalAlignment = VerticalAlignment.Center,
             };
 
-            
-
             StackPanel.Children.Add(ProgressBar);
             StackPanel.Children.Add(Label);
         }
 
-        
-
-        public void SetColor(Color color)
+        protected void NotifyPropertyChanged<T>(ref T oldValue, T newValue, [CallerMemberName] string propertyName = "")
         {
-            // Value = value;
-            // ProgressBar.Value = value;
-            // Label.Content = value.ToString();
-            Color = new SolidColorBrush(color);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Color)));
+            oldValue = newValue;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public int CompareTo(object obj)
