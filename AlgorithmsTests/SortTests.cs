@@ -16,14 +16,14 @@ namespace AlgorithmsTests
         private readonly Random _random = new Random();
         private readonly IList<int> _itemsForSorting = new List<int>();
         private readonly IList<int> _itemsSorted;
-        private readonly int itemsCount = 8000;
+        private const int ItemsCount = 8000;
 
         public SortTests()
         {
             // sorting collections are the same
-            for (var i = 0; i < itemsCount; i++)
+            for (var i = 0; i < ItemsCount; i++)
             {
-                _itemsForSorting.Add(_random.Next(100));
+                _itemsForSorting.Add(_random.Next(1000));
             }
 
             _itemsSorted = _itemsForSorting.OrderBy(x => x).ToList();
@@ -39,7 +39,7 @@ namespace AlgorithmsTests
             bubbleSort.Sort(false);
             
             // Assert
-            for (var i = 0; i < itemsCount; i++)
+            for (var i = 0; i < ItemsCount; i++)
             {
                 Assert.AreEqual(_itemsSorted[i], bubbleSort.Items[i]);    
             }
@@ -52,7 +52,7 @@ namespace AlgorithmsTests
             
             cocktailSort.Sort(false);
 
-            for (var i = 0; i < itemsCount; i++)
+            for (var i = 0; i < ItemsCount; i++)
             {
                 Assert.AreEqual(_itemsSorted[i], cocktailSort.Items[i]);
             }
@@ -65,9 +65,22 @@ namespace AlgorithmsTests
             
             insertSort.Sort(false);
 
-            for (var i = 0; i < itemsCount; i++)
+            for (var i = 0; i < ItemsCount; i++)
             {
                 Assert.AreEqual(_itemsSorted[i], insertSort.Items[i]);
+            }
+        }
+        
+        [Test]
+        public void SelectionSortTest()
+        {
+            var selectionSort = new SelectionSort<int> {Items = new List<int>(_itemsForSorting)};
+            
+            selectionSort.Sort(false);
+
+            for (var i = 0; i < ItemsCount; i++)
+            {
+                Assert.AreEqual(_itemsSorted[i], selectionSort.Items[i]);
             }
         }
     }
