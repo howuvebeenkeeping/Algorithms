@@ -54,28 +54,28 @@ namespace SortingAlgorithms
 
         private void BtnBubbleSort_Click(object sender, RoutedEventArgs e)
         {
-            var bubbleSort = new BubbleSort<SortingItem> {Items = this.Items};
+            var bubbleSort = new BubbleSort<SortingItem>(this.Items);
             bubbleSort.ColorChanged += OnColorChangedEvent;
             bubbleSort.Sort(true);
         }
         
         private void BtnCocktailSort_OnClick(object sender, RoutedEventArgs e)
         {
-            var cocktailSort = new CocktailSort<SortingItem> {Items = this.Items};
+            var cocktailSort = new CocktailSort<SortingItem>(this.Items);
             cocktailSort.ColorChanged += OnColorChangedEvent;
             cocktailSort.Sort(true);
         }
 
         private void BtnInsertSort_OnClick(object sender, RoutedEventArgs e)
         {
-            var insertSort = new InsertSort<SortingItem> {Items = this.Items};
+            var insertSort = new InsertSort<SortingItem>(this.Items);
             insertSort.ColorChanged += OnColorChangedEvent;
             insertSort.Sort(true);
         }
 
         private void BtnShellSort_OnClick(object sender, RoutedEventArgs e)
         {
-            var shellSort = new ShellSort<SortingItem> {Items = this.Items};
+            var shellSort = new ShellSort<SortingItem>(this.Items);
             shellSort.ColorChanged += OnColorChangedEvent;
             shellSort.Sort(true);
         }

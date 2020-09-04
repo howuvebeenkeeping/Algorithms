@@ -33,7 +33,7 @@ namespace AlgorithmsTests
         public void BubbleSortTest()
         {
             // Arrange
-            var bubbleSort = new BubbleSort<int> {Items = new List<int>(_itemsForSorting)};
+            var bubbleSort = new BubbleSort<int>(new List<int>(_itemsForSorting));
 
             // Act
             bubbleSort.Sort(false);
@@ -48,7 +48,7 @@ namespace AlgorithmsTests
         [Test]
         public void CocktailSortTest()
         {
-            var cocktailSort = new CocktailSort<int> {Items = new List<int>(_itemsForSorting)};
+            var cocktailSort = new CocktailSort<int>(new List<int>(_itemsForSorting));
             
             cocktailSort.Sort(false);
 
@@ -61,7 +61,7 @@ namespace AlgorithmsTests
         [Test]
         public void InsertSortTest()
         {
-            var insertSort = new InsertSort<int> {Items = new List<int>(_itemsForSorting)};
+            var insertSort = new InsertSort<int>(new List<int>(_itemsForSorting));
             
             insertSort.Sort(false);
 
@@ -74,7 +74,7 @@ namespace AlgorithmsTests
         [Test]
         public void SelectionSortTest()
         {
-            var selectionSort = new SelectionSort<int> {Items = new List<int>(_itemsForSorting)};
+            var selectionSort = new SelectionSort<int>(new List<int>(_itemsForSorting));
             
             selectionSort.Sort(false);
 
@@ -87,7 +87,7 @@ namespace AlgorithmsTests
         [Test]
         public void ShellSortTest()
         {
-            var shellSort = new ShellSort<int> {Items = new List<int>(_itemsForSorting)};
+            var shellSort = new ShellSort<int>(new List<int>(_itemsForSorting));
             
             shellSort.Sort(false);
 

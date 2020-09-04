@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Algorithms.SortingAlgorithms
 {
     public class InsertSort<T> : SortBase<T> where T : IComparable, new()
     {
+        public InsertSort(IList<T> items) : base(items) { }
+        
         // O(n)   - the best
         // O(n^2) - the average
         // O(n^2) - the worst

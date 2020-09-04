@@ -6,6 +6,8 @@ namespace Algorithms.SortingAlgorithms
 {
     public class SelectionSort<T> : SortBase<T> where T : IComparable
     {
+        // TODO: O(?)
+        public SelectionSort(IList<T> items) : base(items) { }
         protected override void DoSort()
         {
             var newArr = new List<T>();

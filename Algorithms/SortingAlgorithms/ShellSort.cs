@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -6,6 +7,8 @@ namespace Algorithms.SortingAlgorithms
 {
     public class ShellSort<T> : SortBase<T> where T : IComparable
     {
+        // TODO: O(?)
+        public ShellSort(IList<T> items) : base(items) { }
         protected override void DoSort()
         {
             var gap = Items.Count / 2;

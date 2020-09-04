@@ -10,6 +10,11 @@ namespace Algorithms.SortingAlgorithms
 {
     public abstract class SortBase<T> where T : IComparable
     {
+        protected SortBase(IList<T> items)
+        {
+            Items = items;
+        }
+
         protected int SwapCount { get; set; } = 0;
         protected int CompareCount { get; set; } = 0;
         public IList<T> Items { get; set; }

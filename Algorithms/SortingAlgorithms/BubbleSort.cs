@@ -7,6 +7,8 @@ namespace Algorithms.SortingAlgorithms
 {
     public class BubbleSort<T> : SortBase<T> where T : IComparable
     {
+        public BubbleSort(IList<T> items) : base(items) { }
+
         // O(n)   - the best
         // O(n^2) - the average
         // O(n^2) - the worst
