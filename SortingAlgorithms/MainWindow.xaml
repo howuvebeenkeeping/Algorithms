@@ -80,9 +80,10 @@
         </ScrollViewer>
 
         <StackPanel Grid.Row="1">
-            <Button x:Name="BtnBubbleSort"  Height="30" Content="BubbleSort" Click="BtnBubbleSort_Click"/>
-            <Button x:Name="BtnCocktailSort" Height="30" Content="CocktailSort" Click="BtnCocktailSort_OnClick"/>
-            <Button x:Name="BtnInsertSort" Height="30" Content="InsertSort" Click="BtnInsertSort_OnClick"/>
+            <Button x:Name="BtnBubbleSort"  Height="30" Content="Bubble sort" Click="BtnBubbleSort_Click"/>
+            <Button x:Name="BtnCocktailSort" Height="30" Content="Cocktail sort" Click="BtnCocktailSort_OnClick"/>
+            <Button x:Name="BtnInsertSort" Height="30" Content="Insert sort" Click="BtnInsertSort_OnClick"/>
+            <Button x:Name="BtnShellSort" Height="30" Content="Shell sort" Click="BtnShellSort_OnClick"/>
         </StackPanel>
     </Grid>
 

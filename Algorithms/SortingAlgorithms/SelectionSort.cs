@@ -9,17 +9,17 @@ namespace Algorithms.SortingAlgorithms
         protected override void DoSort()
         {
             var newArr = new List<T>();
-            var count = Items.Count;
-            for (var i = 0; i < count; i++)
+            var itemsCount = Items.Count;
+            for (var i = 0; i < itemsCount; i++)
             {
-                var smallest = Items.Min();
+                var smallest = Items.Min(); 
                 newArr.Add(smallest);
                 Items.Remove(smallest);
             }
             Items = newArr;
         }
 
-        private static T FindSmallest(IList<T> arr)
+        private static T FindSmallest(IList<T> arr) // Min работает быстрее FindSmallest
         {
             var smallest = arr[0];
             foreach (var item in arr)

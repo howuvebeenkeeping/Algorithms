@@ -44,6 +44,7 @@
     <Compile Include="SortingAlgorithms\CocktailSort.cs" />
     <Compile Include="SortingAlgorithms\InsertSort.cs" />
     <Compile Include="SortingAlgorithms\SelectionSort.cs" />
+    <Compile Include="SortingAlgorithms\ShellSort.cs" />
     <Compile Include="SortingAlgorithms\SortBase.cs" />
     <Compile Include="SortingAlgorithms\BubbleSort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

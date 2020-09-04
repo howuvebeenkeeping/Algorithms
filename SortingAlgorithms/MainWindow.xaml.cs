@@ -44,7 +44,7 @@ namespace SortingAlgorithms
 
                 for (var i = 0; i < value; i++)
                 {
-                    var item = new SortingItem(rnd.Next(100), Items.Count + 1);
+                    var item = new SortingItem(rnd.Next(10, 100), Items.Count + 1);
                     Items.Add(item);
                 }
             }
@@ -71,6 +71,13 @@ namespace SortingAlgorithms
             var insertSort = new InsertSort<SortingItem> {Items = this.Items};
             insertSort.ColorChanged += OnColorChangedEvent;
             insertSort.Sort(true);
+        }
+
+        private void BtnShellSort_OnClick(object sender, RoutedEventArgs e)
+        {
+            var shellSort = new ShellSort<SortingItem> {Items = this.Items};
+            shellSort.ColorChanged += OnColorChangedEvent;
+            shellSort.Sort(true);
         }
 
         private void OnColorChangedEvent(object sender, Tuple<SortingItem, SortingItem, SortBase<SortingItem>.ChangeColor> e)
