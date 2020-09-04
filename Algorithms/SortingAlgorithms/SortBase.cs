@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Algorithms.SortingAlgorithms
 {
-    public abstract class SortBase<T> where T : IComparable
+    public class SortBase<T> where T : IComparable
     {
-        protected SortBase(IList<T> items)
+        public SortBase(IList<T> items)
         {
             Items = items;
         }
@@ -59,9 +59,12 @@ namespace Algorithms.SortingAlgorithms
             return timer.ElapsedMilliseconds;
         }
 
-        protected abstract void DoSort();
+        protected virtual void DoSort()
+        {
+            Items = Items.OrderBy(x => x).ToList();
+        }
 
-        protected abstract void DoSortVisualization();
+        protected virtual void DoSortVisualization() { }
 
         public enum ChangeColor
         {

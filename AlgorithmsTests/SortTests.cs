@@ -30,6 +30,19 @@ namespace AlgorithmsTests
         }
 
         [Test]
+        public void BaseSortTest()
+        {
+            var baseSort = new SortBase<int>(new List<int>(_itemsForSorting));
+            
+            baseSort.Sort(false);
+
+            for (var i = 0; i < ItemsCount; i++)
+            {
+                Assert.AreEqual(_itemsSorted[i], baseSort.Items[i]);
+            }
+        }
+        
+        [Test]
         public void BubbleSortTest()
         {
             // Arrange
