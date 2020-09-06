@@ -15,22 +15,23 @@ namespace Algorithms.SortingAlgorithms
             Items = items;
         }
 
-        protected int SwapCount { get; set; } = 0;
-        protected int CompareCount { get; set; } = 0;
-        public IList<T> Items { get; set; }
+        public int SwapCount { get; set; } = 0;
+        public int CompareCount { get; set; } = 0;
+        internal IList<T> Items { get; set; }
+
         public event EventHandler<Tuple<T, T, ChangeColor>> ColorChanged;
 
         protected void Swap(int pos1, int pos2)
         {
-            SwapCount++;
             (Items[pos1], Items[pos2]) = (Items[pos2], Items[pos1]);
+            SwapCount++;
             OnColorChanged(Items[pos1], Items[pos2], ChangeColor.Swap);
         }
 
         protected int Compare(T a, T b)
         {
-            OnColorChanged(a, b, ChangeColor.Compare);
             CompareCount++;
+            OnColorChanged(a, b, ChangeColor.Compare);
             return a.CompareTo(b);
         }
 
@@ -44,19 +45,20 @@ namespace Algorithms.SortingAlgorithms
             ColorChanged?.Invoke(this, new Tuple<T, T, ChangeColor>(a, b, color));
         }
 
-        public long Sort(bool visualizationOn)
+        public async Task<TimeSpan> Sort(bool visualizationOn)
         {
+            SwapCount = CompareCount = 0;
+            var itemsCopy = new List<T>(Items);
             if (visualizationOn)
             {
-                DoSortVisualization();
-                return 0;
+                await DoSortVisualization();
             }
-            SwapCount = CompareCount = 0;
-            var timer = new Stopwatch();
-            timer.Start();
+            Items = itemsCopy;
+            SwapCount = 0;
+            var timer = Stopwatch.StartNew();
             DoSort();
             timer.Stop();
-            return timer.ElapsedMilliseconds;
+            return timer.Elapsed;
         }
 
         protected virtual void DoSort()
@@ -64,7 +66,10 @@ namespace Algorithms.SortingAlgorithms
             Items = Items.OrderBy(x => x).ToList();
         }
 
-        protected virtual void DoSortVisualization() { }
+        protected virtual Task DoSortVisualization() 
+        {
+            return Task.CompletedTask;
+        }
 
         public enum ChangeColor
         {

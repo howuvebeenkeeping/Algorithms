@@ -52,34 +52,45 @@ namespace SortingAlgorithms
             TextBoxFillWithRandom.Text = string.Empty;
         }
 
-        private void BtnBubbleSort_Click(object sender, RoutedEventArgs e)
+        private async void BtnBubbleSort_Click(object sender, RoutedEventArgs e)
         {
             var bubbleSort = new BubbleSort<SortingItem>(this.Items);
             bubbleSort.ColorChanged += OnColorChangedEvent;
-            bubbleSort.Sort(true);
+            var totalTime = await bubbleSort.Sort(visualizationOn: true);
+            FillLabels(bubbleSort.SwapCount, bubbleSort.CompareCount, totalTime);
         }
         
-        private void BtnCocktailSort_OnClick(object sender, RoutedEventArgs e)
+        private async void BtnCocktailSort_OnClick(object sender, RoutedEventArgs e)
         {
             var cocktailSort = new CocktailSort<SortingItem>(this.Items);
             cocktailSort.ColorChanged += OnColorChangedEvent;
-            cocktailSort.Sort(true);
+            var totalTime = await cocktailSort.Sort(visualizationOn: true);
+            FillLabels( cocktailSort.SwapCount, cocktailSort.CompareCount, totalTime);
         }
 
-        private void BtnInsertSort_OnClick(object sender, RoutedEventArgs e)
+        private async void BtnInsertSort_OnClick(object sender, RoutedEventArgs e)
         {
             var insertSort = new InsertSort<SortingItem>(this.Items);
             insertSort.ColorChanged += OnColorChangedEvent;
-            insertSort.Sort(true);
+            var totalTime = await insertSort.Sort(visualizationOn: true);
+            FillLabels(insertSort.SwapCount, insertSort.CompareCount, totalTime);
         }
 
-        private void BtnShellSort_OnClick(object sender, RoutedEventArgs e)
+        private async void BtnShellSort_OnClick(object sender, RoutedEventArgs e)
         {
             var shellSort = new ShellSort<SortingItem>(this.Items);
             shellSort.ColorChanged += OnColorChangedEvent;
-            shellSort.Sort(true);
+            var totalTime = await shellSort.Sort(visualizationOn: true);
+            FillLabels(shellSort.SwapCount, shellSort.CompareCount, totalTime);
         }
 
+        private void FillLabels(int swapCount, int compareCount, TimeSpan totalTime)
+        {
+            LblSwapCount.Content = $"Кол-во замен/вставок: {swapCount}";
+            LblCompareCount.Content = $"Кол-во сравнений: {compareCount}";
+            LblTotalTime.Content = $"Время сортировки: {totalTime}";
+        }
+        
         private void OnColorChangedEvent(object sender, Tuple<SortingItem, SortingItem, SortBase<SortingItem>.ChangeColor> e)
         {
             switch (e.Item3)

@@ -16,14 +16,14 @@ namespace AlgorithmsTests
         private readonly Random _random = new Random();
         private readonly IList<int> _itemsForSorting = new List<int>();
         private readonly IList<int> _itemsSorted;
-        private const int ItemsCount = 8000;
+        private readonly int ItemsCount = 10_000;
 
         public SortTests()
         {
             // sorting collections are the same
             for (var i = 0; i < ItemsCount; i++)
             {
-                _itemsForSorting.Add(_random.Next(1000));
+                _itemsForSorting.Add(_random.Next(10, 100));
             }
 
             _itemsSorted = _itemsForSorting.OrderBy(x => x).ToList();

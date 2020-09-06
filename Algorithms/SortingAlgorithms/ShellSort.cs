@@ -17,9 +17,10 @@ namespace Algorithms.SortingAlgorithms
                 for (var i = gap; i < Items.Count; i++)
                 {
                     var j = i;
-                    while (j >= gap && Items[j - gap].CompareTo(Items[j]) == 1)
+                    while (j >= gap && Items[j - gap].CompareTo(Items[j]) == 1 && CompareCount == CompareCount++)
                     {
-                        Swap(j, j - gap);
+                        (Items[j - gap], Items[j]) = (Items[j], Items[j - gap]);
+                        SwapCount++;
                         j -= gap;
                     }
                 }
@@ -27,7 +28,7 @@ namespace Algorithms.SortingAlgorithms
             }
         }
 
-        protected override async void DoSortVisualization()
+        protected override async Task DoSortVisualization()
         {
             var gap = Items.Count / 2;
             while (gap > 0)

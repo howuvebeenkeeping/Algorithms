@@ -17,19 +17,18 @@ namespace Algorithms.SortingAlgorithms
             {
                 var temp = Items[i];
                 var j = i;
-                while (j > 0 && Compare(temp, Items[j - 1]) == -1)
+                while (j > 0 && temp.CompareTo(Items[j - 1]) == -1 && CompareCount == CompareCount++)
                 {
                     Items[j] = Items[j - 1];
-                    Items[j - 1] = default!;
-                    j--;
                     SwapCount++;
-                    CompareCount++;
+                    j--;
                 }
                 Items[j] = temp;
+                SwapCount++;
             }
         }
 
-        protected override async void DoSortVisualization()
+        protected override async Task DoSortVisualization()
         {
             for (var i = 1; i < Items.Count; i++)
             {
@@ -42,10 +41,8 @@ namespace Algorithms.SortingAlgorithms
                     OnColorChanged(temp, Items[j - 1], ChangeColor.Default);
                     Items[j] = Items[j - 1];
                     Items[j - 1] = default!;
-                    await Task.Delay(400);
                     j--;
-                    SwapCount++;
-                    CompareCount++;
+                    await Task.Delay(400);
                 }
                 OnColorChanged(temp, Items[j - 1], ChangeColor.Default);
                 Items[j] = temp;

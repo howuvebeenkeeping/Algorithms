@@ -21,22 +21,19 @@ namespace Algorithms.SortingAlgorithms
                 var swapCountPrev = SwapCount;
                 for (var i = 0; i < count - j - 1; i++)
                 {
-                    var a = Items[i];
-                    var b = Items[i + 1];
-                    if (Compare(a, b) == 1)
+                    if (Items[i].CompareTo(Items[i + 1]) == 1)
                     {
-                        Swap(i, i + 1);
+                        (Items[i], Items[i + 1]) = (Items[i + 1], Items[i]);
+                        SwapCount++;
                     }
                 }
-
                 if (swapCountPrev == SwapCount) return;
             }
         }
 
-        protected override async void DoSortVisualization()
+        protected override async Task DoSortVisualization()
         {
             var count = Items.Count;
-            // j можно принять за кол-во отсортированных элементов
             for (var j = 0; j < count; j++)
             {
                 var swapCountPrev = SwapCount;
@@ -46,11 +43,10 @@ namespace Algorithms.SortingAlgorithms
                     var b = Items[i + 1];
                     if (Compare(a, b) == 1)
                     {
-                        await Task.Delay(400);
+                        await Task.Delay(20);
                         Swap(i, i + 1);
                     }
-
-                    await Task.Delay(400);
+                    await Task.Delay(20);
                     MakeColorsDefault(a, b);
                 }
 

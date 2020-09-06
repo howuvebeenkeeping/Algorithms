@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Algorithms.SortingAlgorithms
 {
@@ -14,14 +15,14 @@ namespace Algorithms.SortingAlgorithms
             var itemsCount = Items.Count;
             for (var i = 0; i < itemsCount; i++)
             {
-                var smallest = Items.Min(); 
+                var smallest = FindSmallest(Items); 
                 newArr.Add(smallest);
                 Items.Remove(smallest);
             }
             Items = newArr;
         }
 
-        private static T FindSmallest(IList<T> arr) // Min работает быстрее FindSmallest
+        private T FindSmallest(IList<T> arr) // Min работает быстрее FindSmallest
         {
             var smallest = arr[0];
             foreach (var item in arr)
@@ -30,13 +31,14 @@ namespace Algorithms.SortingAlgorithms
                 {
                     smallest = item;
                 }
+                CompareCount++;
             }
             return smallest;
         }
         
-        protected override void DoSortVisualization()
+        protected override Task DoSortVisualization()
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }
