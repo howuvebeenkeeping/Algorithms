@@ -28,5 +28,20 @@ namespace AlgorithmsTests
                 Assert.AreEqual(expected, actual);
             }
         }
+
+        [Test]
+        public void GcdTest()
+        {
+            var test1 = GCD.FindGcd(12, (short)8);
+            var test2 = GCD.FindGcd(12.0, 8f);
+            var test3 = GCD.FindGcd(12L, 8d);
+            var test4 = GCD.FindGcd(12.0, "4UL");
+            var test5 = GCD.FindGcdRecursion(12.0, 8UL);
+            Assert.AreEqual(4.0, test1);
+            Assert.AreEqual(4, test2);
+            Assert.AreEqual(4f, test3);
+            Assert.AreEqual(null, test4);
+            Assert.AreEqual(4d, test5);
+        }
     }
 }

@@ -6,5 +6,7 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::FFA9B572-DDF7-4564-8427-CDC1B76E9340::.NETFramework,Version=v4.7.2::AlgorithmsTests.SearchTests.BinarySearchTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::FFA9B572-DDF7-4564-8427-CDC1B76E9340::.NETFramework,Version=v4.7.2::AlgorithmsTests.SortTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::FFA9B572-DDF7-4564-8427-CDC1B76E9340::.NETFramework,Version=v4.7.2::AlgorithmsTests.SearchTests.GCDTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::FFA9B572-DDF7-4564-8427-CDC1B76E9340::.NETFramework,Version=v4.7.2::AlgorithmsTests.SearchTests.GcdTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

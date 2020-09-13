@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -41,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SearchingAlgorithms\BinarySearch.cs" />
+    <Compile Include="SearchingAlgorithms\GCD.cs" />
     <Compile Include="SortingAlgorithms\CocktailSort.cs" />
     <Compile Include="SortingAlgorithms\InsertSort.cs" />
     <Compile Include="SortingAlgorithms\SelectionSort.cs" />
