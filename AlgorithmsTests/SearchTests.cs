@@ -36,7 +36,7 @@ namespace AlgorithmsTests
             var test2 = GCD.FindGcd(12.0, 8f);
             var test3 = GCD.FindGcd(12L, 8d);
             var test4 = GCD.FindGcd(12.0, "4UL");
-            var test5 = GCD.FindGcdRecursion(12.0, 8UL);
+            var test5 = GCD.FindGcdRecursion(12d, 8UL);
             Assert.AreEqual(4.0, test1);
             Assert.AreEqual(4, test2);
             Assert.AreEqual(4f, test3);

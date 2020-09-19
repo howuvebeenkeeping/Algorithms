@@ -109,5 +109,18 @@ namespace AlgorithmsTests
                 Assert.AreEqual(_itemsSorted[i], shellSort.Items[i]);
             }
         }
+
+        [Test]
+        public void TreeSortTest()
+        {
+            var treeSort = new TreeSort<int>(new List<int>(_itemsForSorting));
+
+            treeSort.Sort(false);
+
+            for (var i = 0; i < ItemsCount; i++)
+            {
+                Assert.AreEqual(_itemsSorted[i], treeSort.Items[i]);
+            }
+        }
     }
 }

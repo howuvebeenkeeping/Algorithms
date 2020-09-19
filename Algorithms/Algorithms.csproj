@@ -44,12 +44,15 @@
     <Compile Include="SearchingAlgorithms\BinarySearch.cs" />
     <Compile Include="SearchingAlgorithms\GCD.cs" />
     <Compile Include="SortingAlgorithms\CocktailSort.cs" />
+    <Compile Include="SortingAlgorithms\DataStructure\Node.cs" />
+    <Compile Include="SortingAlgorithms\DataStructure\Tree.cs" />
     <Compile Include="SortingAlgorithms\InsertSort.cs" />
     <Compile Include="SortingAlgorithms\SelectionSort.cs" />
     <Compile Include="SortingAlgorithms\ShellSort.cs" />
     <Compile Include="SortingAlgorithms\SortBase.cs" />
     <Compile Include="SortingAlgorithms\BubbleSort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SortingAlgorithms\TreeSort.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
